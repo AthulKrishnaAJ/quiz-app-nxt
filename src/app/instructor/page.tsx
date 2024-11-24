@@ -2,6 +2,9 @@
 
 import React, { useState} from 'react'
 import {FormEvent, ChangeEvent, ChangeEventArea} from '../../types/type'
+import axios from 'axios'
+import { toast } from 'sonner'
+
 
 
 type Error = {
@@ -15,8 +18,9 @@ function Instructor() {
     const [options, setOptions] = useState<string[]>(['', '', '', ''])
     const [answer, setAnswer] = useState<string>('')
     const [errors, setErrors] = useState<Error>({questionError: '', answerError: '', optionError: ''})
+    
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         let isValid = true
         let errorObj: Error = {questionError: '', answerError: '', optionError: ''}
@@ -38,6 +42,22 @@ function Instructor() {
         setErrors(errorObj)
 
         if(isValid){
+            try{
+                const response = await axios.post('/api/post', {question, options, answer})
+                toast.success('Successfully added')
+                setQuestion('')
+                setOptions(['', '', '', ''])
+                setAnswer('')
+                console.log('Response from next server:',response)
+            } catch (error: any){
+                if(error.response && error.response.data){
+                    toast.error(error.response.data.message)
+                } else {
+                    console.log('ERROR making request: ', error.message || error)
+                    toast.error('An unexpected error occur')
+                }
+            }
+
             
         }
 
@@ -101,14 +121,14 @@ function Instructor() {
             value={answer}
             onChange={(e: ChangeEvent) => {
                 setAnswer(e.target.value)
-            }}
+            }} 
             placeholder='Add answer'
             className='w-full p-1 mb-2 text-black rounded-md focus:outline-none focus:ring focus:ring-violet-300'
             />
             {errors.answerError && <p className='text-sm text-red-500'>Field is required</p>}
         </div>
         <div className='text-center'>
-            <button className='bg-violet-600 text-white shadow-lg px-6 py-2 mt-4 rounded-md hover:bg-violet-700'>
+            <button className='bg-violet-600 w-40 text-white shadow-lg px-6 py-2 mt-4 rounded-md hover:bg-violet-700 duration-500 hover:scale-110'>
                 Submit
             </button>
         </div>
