@@ -15,7 +15,7 @@ export default function Home() {
           <button
             className="relative flex h-[50px] w-40 items-center justify-center overflow-hidden bg-violet-600
              text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-full 
-               before:duration-500 before:ease-out hover:shadow-violet-700 hover:before:h-56 hover:before:w-56 rounded"
+               before:duration-500 before:ease-out hover:shadow-violet-700 hover:before:h-56 hover:before:w-56 rounded hover:scale-125"
           >
             <span className="relative z-10">Student</span>
           </button>
@@ -27,7 +27,7 @@ export default function Home() {
           <button
             className="relative flex h-[50px] w-40 items-center justify-center overflow-hidden bg-green-600
              text-white shadow-2xl transition-all before:absolute before:h-0 before:w-0 before:rounded-full 
-               before:duration-500 before:ease-out hover:shadow-green-400 hover:before:h-56 hover:before:w-56 rounded"
+               before:duration-500 before:ease-out hover:shadow-green-400 hover:before:h-56 hover:before:w-56 rounded hover:scale-125"
           >
             <span className="relative z-10">Instructor</span>
           </button>

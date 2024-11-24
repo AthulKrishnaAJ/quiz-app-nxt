@@ -128,7 +128,7 @@ function Instructor() {
             {errors.answerError && <p className='text-sm text-red-500'>Field is required</p>}
         </div>
         <div className='text-center'>
-            <button className='bg-violet-600 w-40 text-white shadow-lg px-6 py-2 mt-4 rounded-md hover:bg-violet-700 duration-500 hover:scale-110'>
+            <button className='bg-green-600 w-40 text-white shadow-lg px-6 py-2 mt-4 rounded-md hover:bg-green-700 duration-300 hover:scale-110'>
                 Submit
             </button>
         </div>
