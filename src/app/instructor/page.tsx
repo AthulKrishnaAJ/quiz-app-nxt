@@ -4,6 +4,7 @@ import React, { useState} from 'react'
 import {FormEvent, ChangeEvent, ChangeEventArea} from '../../types/type'
 import axios from 'axios'
 import { toast } from 'sonner'
+import { lineSpinner } from 'ldrs'
 
 
 
@@ -18,10 +19,13 @@ function Instructor() {
     const [options, setOptions] = useState<string[]>(['', '', '', ''])
     const [answer, setAnswer] = useState<string>('')
     const [errors, setErrors] = useState<Error>({questionError: '', answerError: '', optionError: ''})
+    const [loading, setLoading] = useState(false)
     
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+        setLoading(true)
+
         let isValid = true
         let errorObj: Error = {questionError: '', answerError: '', optionError: ''}
         if(question.trim() === ''){
@@ -44,10 +48,13 @@ function Instructor() {
         if(isValid){
             try{
                 const response = await axios.post('/api/post', {question, options, answer})
-                toast.success('Successfully added')
                 setQuestion('')
                 setOptions(['', '', '', ''])
                 setAnswer('')
+                setTimeout(() => {
+                    setLoading(false)
+                    toast.success('Successfully added')
+                }, 1000)
                 console.log('Response from next server:',response)
             } catch (error: any){
                 if(error.response && error.response.data){
@@ -61,6 +68,16 @@ function Instructor() {
             
         }
 
+    }
+
+    if(loading){
+        lineSpinner.register()
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-slate-800 to-stone-200">
+                <l-line-spinner size={40} stroke={3} speed={1}></l-line-spinner>
+                <p>{" "}processing...</p>
+            </div>
+        )
     }
 
   return (

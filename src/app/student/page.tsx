@@ -3,6 +3,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { ChangeEvent } from '@/types/type'
+import { lineSpinner } from 'ldrs'
 
 type Quiz = {
   _id: string;
@@ -17,6 +18,7 @@ function Student() {
   const [questionIndex, setQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<{ [key: string]: string }>({})
   const [result, setResult] = useState<number | null>(null)
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +29,13 @@ function Student() {
           setQuizes(data.data)
         } catch (error: any) {
           console.log('Error fetching quizes: ', error.message || error)
+        } finally {
+          setLoading(false)
         }
     }
-    fetchData()
+    setTimeout(() => {
+      fetchData()
+    }, 500)
   }, [])
 
 
@@ -59,6 +65,18 @@ function Student() {
 
   
   const currentQuiz = quizes[questionIndex]
+
+
+
+  if (loading) {
+   lineSpinner.register()
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-slate-800 to-stone-200">
+        <l-line-spinner size={40} stroke={3} speed={1}></l-line-spinner>
+      </div>
+    );
+  }
+
 
   if(result !== null){
     return(
