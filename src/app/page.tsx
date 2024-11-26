@@ -3,13 +3,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="grid items-center justify-center min-h-screen p-8 pb-20 sm:pt-18 bg-gradient-to-b from-slate-800 to-stone-200">
-
-    <h1 className="text-4xl font-bold text-center text-gray-200 font-mono">
+  <main className="flex flex-col gap-8 items-center justify-center mt-4 text-center">
+    <h1 className="text-4xl font-bold text-gray-200 font-mono">
       Welcome to Brainblast
     </h1>
-    <main className="flex flex-col gap-8 items-center sm:items-start mt-4">
-      <div className="flex justify-between gap-x-20 p-20 rounded-lg">
-        <div className="flex flex-col gap-2">
+    <div className="flex flex-col sm:flex-row justify-center gap-x-20 gap-y-10 p-20 rounded-lg">
+      <div className="flex flex-col gap-2 items-center">
         <p className="text-gray-100 font-bold text-lg">Let's Play</p>
         <Link href="/student">
           <button
@@ -20,9 +19,9 @@ export default function Home() {
             <span className="relative z-10">Student</span>
           </button>
         </Link>
-        </div>
-        <div className="flex flex-col gap-2">
-        <p className="text-gray-100 font-bold text-lg">Add question</p>
+      </div>
+      <div className="flex flex-col gap-2 items-center">
+        <p className="text-gray-100 font-bold text-lg">Add Question</p>
         <Link href="/instructor">
           <button
             className="relative flex h-[50px] w-40 items-center justify-center overflow-hidden bg-green-600
@@ -32,11 +31,11 @@ export default function Home() {
             <span className="relative z-10">Instructor</span>
           </button>
         </Link>
-        </div>
       </div>
-    </main>
-
+    </div>
+  </main>
 </div>
+
 
   );
 }

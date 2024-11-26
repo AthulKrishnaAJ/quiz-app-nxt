@@ -4,7 +4,7 @@ import connectDB from "@/lib/mongoDb";
 
 export async function GET(req: NextRequest){
     try{
-        // await connectDB()
+        await connectDB()
         const data = await Question.find()
         return NextResponse.json({status: true, data: data}, {status: 200})
     }catch(error: any){

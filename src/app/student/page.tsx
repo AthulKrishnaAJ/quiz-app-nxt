@@ -96,7 +96,7 @@ function Student() {
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-slate-800 to-stone-200'>
       <h1 className='text-4xl font-bold mb-6'>Student page</h1>
-      <div className='w-full max-w-lg bg-gray-300 shadow-md rounded-md p-6'>
+      <div className='w-full max-w-lg bg-slate-300 shadow-md rounded-md p-6'>
         <form>
           <h2 className='text-xl font-medium mb-4 text-gray-800'>
             Question {questionIndex + 1}:<br/>
